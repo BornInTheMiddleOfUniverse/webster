@@ -1,0 +1,28 @@
+{
+    "name": "webster",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+      "dev": "babel-node index.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/BornInTheMiddleOfUniverse/webster.git"
+    },
+    "author": "youredith3@gmail.com",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/BornInTheMiddleOfUniverse/webster/issues"
+    },
+    "homepage": "https://github.com/BornInTheMiddleOfUniverse/webster#readme",
+    "dependencies": {
+      "express": "^4.18.1",
+      "nodemon": "^2.0.19"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.18.10",
+      "@babel/node": "^7.18.10",
+      "@babel/preset-env": "^7.18.10"
+    }
+  }
+  
