@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap");
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 50px;
+    align-items: center;
+    justify-content: space-between;
+    .header__site_logo {
+        color:$wred;
+        font-size: 38px;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    }
+}

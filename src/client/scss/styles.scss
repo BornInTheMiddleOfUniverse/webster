@@ -1,10 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap");
+
+
+//Config
 @import "./config/_variables.scss";
 @import "./config/_reset.scss";
 
-//Grids
+//Components
+@import "./components/header.scss";
+@import "./components/footer.scss";
 
-header {
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 10px;
-}
+//screens
+
+
+//Defaults
+
+
