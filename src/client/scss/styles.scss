@@ -1,4 +1,5 @@
-
+//fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 //Config
 @import "./config/_variables.scss";
@@ -12,5 +13,20 @@
 
 
 //Defaults
+body {
+    font-family: 'Roboto', sans-serif;
+    display: grid;
+    grid-template-rows: 50px auto 200px;
+    margin: 30px;
 
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    main {
+        height: 100vh;
+    }
+    
+}
 
