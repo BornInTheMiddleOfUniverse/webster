@@ -1,11 +1,20 @@
 doctype html
 html(lang="en")
     head       
-        title Webster
+        title Webster | #{pageTitle} 
         link(rel="stylesheet", href="/static/css/styles.css")
     body 
         include partials/header.pug
+        
         main
+            div.menu
+                ul 
+                    li Video
+                    li Twits 
+                    li Shop 
+                    li People
+                    li Game
             block content
+            div.user_menu
 
         include partials/footer.pug

@@ -1,2 +1,1 @@
-# webster - Mind Training Club
-
+# webster
