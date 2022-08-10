@@ -1,0 +1,9 @@
+extends base
+include mixin/video
+
+block content
+    ul.video_list
+        each video in fakeVideos 
+            li=video.title
+        else
+            li Sorry nothing found.

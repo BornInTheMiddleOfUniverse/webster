@@ -9,12 +9,16 @@ html(lang="en")
         main
             div.menu
                 ul 
-                    li Video
+                    li
+                        a(href="/videos") Video
                     li Twits 
                     li Shop 
                     li People
                     li Game
+
+                div.brief_user_info User Info
+
             block content
-            div.user_menu
+            
 
         include partials/footer.pug

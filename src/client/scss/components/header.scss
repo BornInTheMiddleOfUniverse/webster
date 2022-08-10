@@ -12,7 +12,7 @@ header {
     .header__site_logo { 
         a {
         font-family: 'Playball', cursive;
-        font-size: 38px;
+        font-size: 50px;
         font-weight: 550;
         background: radial-gradient(circle farthest-side at center center, #ff0f6f 20%, #c91db2 100%);
         background-clip: text;
@@ -20,4 +20,5 @@ header {
         -webkit-text-fill-color: transparent;
     }        
     }
+    
 }

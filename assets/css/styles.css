@@ -69,7 +69,7 @@ header {
 }
 header .header__site_logo a {
   font-family: "Playball", cursive;
-  font-size: 38px;
+  font-size: 50px;
   font-weight: 550;
   background: radial-gradient(circle farthest-side at center center, #ff0f6f 20%, #c91db2 100%);
   background-clip: text;
@@ -81,6 +81,15 @@ footer {
   display: grid;
   align-items: center;
   bottom: -200px;
+}
+
+div.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+div.menu div.brief_user_info {
+  display: flex;
 }
 
 body {

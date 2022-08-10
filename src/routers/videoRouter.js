@@ -1,8 +1,8 @@
 import express from "express";
-import { video } from "../controllers/globalController";
+import { videos } from "../controllers/videoController";
 
 const videoRouter = express.Router();
 
-videoRouter.get("/video", video);
+videoRouter.get("/", videos);
 
 export default videoRouter;
