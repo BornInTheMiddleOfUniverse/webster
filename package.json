@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "dev:server": "nodemon --exec babel-node src/server.js",
+        "dev:server": "nodemon --exec babel-node src/init.js",
         "dev:assets": "webpack --config webpack.config.js"
     },
     "repository": {

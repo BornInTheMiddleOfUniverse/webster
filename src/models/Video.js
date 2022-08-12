@@ -9,7 +9,7 @@ const videoSchema= new mongoose.Schema({
         views: { type: Number },
         rating: { type: Number }
     },
-})
+});
 
 const Video = mongoose.model("Video", videoSchema);
 export default Video;

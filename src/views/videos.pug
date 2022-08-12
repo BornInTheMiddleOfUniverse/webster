@@ -3,7 +3,7 @@ include mixin/video
 
 block content
     ul.video_list
-        each video in fakeVideos 
-            li=video.title
+        each video in videos 
+            +video(video)
         else
             li Sorry nothing found.

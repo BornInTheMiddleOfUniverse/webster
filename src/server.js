@@ -1,11 +1,11 @@
 import express from "express";
+import "./db";
+import "./models/Video";
 import { localsMiddleware, logger } from "./middlewares";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 
-
-const PORT = 4000;
 const app = express();
 
 app.set("view engine", "pug")
@@ -18,8 +18,5 @@ app.use("/static", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/user", userRouter);
 app.use("/videos", videoRouter);
-
-const handleListening = () => console.log(`🚀 Server Listening on port http://localhost:${PORT}`)
-app.listen(PORT, handleListening);
 
 export default app;
