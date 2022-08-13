@@ -13,6 +13,7 @@ app.set("views", process.cwd() + "/src/views")
 
 app.use(localsMiddleware);
 app.use(logger);
+app.use(express.urlencoded({ extended: true }));
 app.use("/static", express.static("assets"));
 
 app.use("/", rootRouter);

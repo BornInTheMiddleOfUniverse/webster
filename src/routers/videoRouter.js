@@ -1,10 +1,11 @@
 import express from "express";
-import { videos, watch } from "../controllers/videoController";
+import { videos, watch, getUpload, postUpload } from "../controllers/videoController";
 
 const videoRouter = express.Router();
 
 videoRouter.get("/", videos);
-videoRouter.get("/:id", watch);
+videoRouter.route("/upload").get(getUpload).post(postUpload);
+videoRouter.get("/:id([0-9a-f]{24})", watch);
 
 
 
