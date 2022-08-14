@@ -9,6 +9,10 @@
 /*!**************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/client/scss/styles.scss (2) ***!
   \**************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap);
+/*!**************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/client/scss/styles.scss (3) ***!
+  \**************************************************************************************************************************/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -60,6 +64,7 @@ table {
 }
 
 header {
+  grid-area: header;
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   grid-template-rows: 50px;
@@ -75,26 +80,51 @@ header .header__site_logo a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+header .header__page_title {
+  bottom: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 25px;
+}
 
 footer {
-  display: grid;
-  align-items: center;
+  grid-area: footer;
   bottom: -200px;
 }
 
 div.menu {
+  grid-area: menu;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-family: "Nunito", sans-serif;
+  font-size: 20px;
+}
+div.menu li {
+  padding: 5px;
 }
 div.menu div.brief_user_info {
+  font-size: 17px;
+  width: auto;
+  height: 100px;
+}
+
+form.video-edit__form {
   display: flex;
+  height: 100vh;
+  color: black;
+}
+
+form.video-edit__form {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
   font-family: "Roboto", sans-serif;
   display: grid;
   grid-template-rows: 50px auto 200px;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-areas: "header header header" "main main main" "footer footer footer";
   margin: 30px;
   background-color: rgba(168, 168, 245, 0.2);
 }
@@ -105,6 +135,11 @@ body a {
 body main {
   height: 100vh;
   margin-top: 30px;
+  grid-area: main;
   display: grid;
+  grid-template-areas: "menu contents .";
   grid-template-columns: 1fr 4fr 1fr;
+}
+body main .contents {
+  grid-area: contents;
 }

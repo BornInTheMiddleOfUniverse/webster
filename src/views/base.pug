@@ -6,19 +6,23 @@ html(lang="en")
     body 
         include partials/header.pug
         
-        main
+        main.main
             div.menu
                 ul 
                     li
                         a(href="/videos") Video
                     li Twits 
-                    li Shop 
                     li People
                     li Game
+                    li Chat
+                    li Club
+                    li Shop 
+
 
                 div.brief_user_info User Info
 
-            block content
+            div.contents
+                block content
             
 
         include partials/footer.pug

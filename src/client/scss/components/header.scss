@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
-
 header {
+    grid-area: header;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 50px;
@@ -17,7 +16,13 @@ header {
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-    }        
+        }        
     }
+    .header__page_title {
+        bottom: 0;
+        font-family: 'Nunito', sans-serif;
+        font-size: 25px;
+    }
+
     
 }

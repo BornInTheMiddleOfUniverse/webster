@@ -1,8 +1,18 @@
 div.menu {
+    grid-area: menu;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    
+    li {
+        padding: 5px;
+    }
+
     div.brief_user_info {
-        display: flex;
+        font-size: 17px;
+        width: auto;
+        height: 100px;
     }
 } 
