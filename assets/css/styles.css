@@ -108,13 +108,7 @@ div.menu div.brief_user_info {
   height: 100px;
 }
 
-form.video-edit__form {
-  display: flex;
-  height: 100vh;
-  color: black;
-}
-
-form.video-edit__form {
+form {
   display: flex;
   flex-direction: column;
 }

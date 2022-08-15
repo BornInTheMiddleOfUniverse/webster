@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { videos } from "../controllers/videoController";
 
 const videoSchema= new mongoose.Schema({
     title: { type: String, required: true, trim: true, maxLength: 30 },
@@ -10,6 +11,11 @@ const videoSchema= new mongoose.Schema({
         rating: { type: Number }
     },
 });
+
+export const formatHashtags = (hashtags) => {
+    hashtags.split(",").map((word) => (word.startsWith("#") ? word : `#${word.trim()}`))
+};
+
 
 const Video = mongoose.model("Video", videoSchema);
 export default Video;

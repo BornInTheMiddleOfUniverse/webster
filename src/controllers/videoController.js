@@ -1,5 +1,6 @@
-import Video from "../models/Video";
+import Video, { formatHashtags } from "../models/Video";
     
+
 export const videos = async (req, res) => {    
         const videos = await Video.find({}).sort({ createdAt: "desc" });
         return res.render("videos", { pageTitle: "Videos", videos });    
@@ -26,7 +27,7 @@ export const postUpload = async (req, res) => {
             title,
             description,
             createdAt: Date.now(),
-            hashtags: hashtags.split(",").map((word) => `#${word.trim()}`),
+            hashtags: formatHashtags(hashtags),
             meta: {
                 views: 0,
                 ratings: 0,
@@ -65,14 +66,15 @@ export const getEdit = async (req, res) => {
     await Video.findByIdAndUpdate(id, {
       title, 
       description,
-      hashtags: hashtags.split(",").map((word) => `#${word.trim()}`),
+      hashtags: formatHashtags(hashtags),
     })
     return res.redirect(`/videos/${id}`);
   };
 
-  
+
 export const deleteVideo = async (req, res) => {  
   const { id } = req.params;  
   await Video.findByIdAndDelete(id);
   return res.redirect("/videos");  
 };
+

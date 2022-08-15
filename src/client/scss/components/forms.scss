@@ -1,5 +1,4 @@
-form.video-edit__form {
-    display:flex;
-    height : 100vh;
-    color: black;
+form {
+    display: flex;
+    flex-direction: column;
 }
