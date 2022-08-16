@@ -2,4 +2,7 @@ header.header
     div.header__site_logo
         a(href="/") Webster    
     div.header__page_title #{pageTitle}
-    div.header__search_bar search_bar
+    div.header__search_bar
+        form(method="GET", action="/videos/search")
+            input(type="text", placeholder="search", name="search")
+            input(type="submit", value="Search")

@@ -27,7 +27,7 @@ export const postUpload = async (req, res) => {
             title,
             description,
             createdAt: Date.now(),
-            hashtags: formatHashtags(hashtags),
+            hashtags: Video.formatHashtags(hashtags),
             meta: {
                 views: 0,
                 ratings: 0,
@@ -66,7 +66,7 @@ export const getEdit = async (req, res) => {
     await Video.findByIdAndUpdate(id, {
       title, 
       description,
-      hashtags: formatHashtags(hashtags),
+      hashtags: Video.formatHashtags(hashtags),
     })
     return res.redirect(`/videos/${id}`);
   };
@@ -78,3 +78,24 @@ export const deleteVideo = async (req, res) => {
   return res.redirect("/videos");  
 };
 
+
+export const search = async (req, res) => {
+  const keyword = req.query.search;
+  let videos = [];
+  
+  try {
+    if ( keyword === "" ) {
+      return res.render("search", { pageTitle: `Please type any keyword for search`, keyword });      
+    } else if (keyword) {
+      videos = await Video.find({
+        title: {
+          $regex: new RegExp(keyword, "i")
+        }
+      });       
+      return res.render("search", { pageTitle: `Search: ${req.query.search}`, videos }); 
+    }
+  } catch (e) {    
+    console.log(e);
+    return res.status(404).render("404", { pageTitle: `Something went wrong.` });
+  }
+};

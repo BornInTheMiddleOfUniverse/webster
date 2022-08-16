@@ -8,6 +8,5 @@ const userSchema = new mongoose.Schema({
     avatarPath: { type: String },
 });
 
-
 const User = mongoose.model("User", userSchema);
 export default User;
