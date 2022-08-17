@@ -3,7 +3,7 @@ import Video, { formatHashtags } from "../models/Video";
 
 export const videos = async (req, res) => {    
         const videos = await Video.find({}).sort({ createdAt: "desc" });
-        return res.render("videos", { pageTitle: "Videos", videos });    
+        return res.render("video/videos_main", { pageTitle: "Videos", videos });    
 };
 
 
@@ -13,12 +13,12 @@ export const watch = async (req, res) => {
     if (!video) {
         return res.status(404).render("404", {pageTitle: "Video not found."})
     }
-    return res.render("watch", {pageTitle: video.title, video})
+    return res.render("video/watch", {pageTitle: video.title, video})
 };
 
 
 export const getUpload = (req, res) => {
-    return res.render("video_upload", { pageTitle: "Upload Video" });
+    return res.render("video/video_upload", { pageTitle: "Upload Video" });
 };
 export const postUpload = async (req, res) => {
     const { title, description, hashtags } = req.body;
@@ -53,7 +53,7 @@ export const getEdit = async (req, res) => {
     if (!video) {
       return res.status(404).render("404", { pageTitle: "Video not found."});
     }
-    return res.render("video_edit", { pageTitle: `Edit: ${video.title}`, video });  
+    return res.render("video/video_edit", { pageTitle: `Edit: ${video.title}`, video });  
   };
   
   export const postEdit = async (req, res) => {

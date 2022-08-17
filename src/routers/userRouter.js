@@ -1,19 +1,17 @@
 import express from "express";
 import {
-    account, login,
-    logout,
-    getEdit, postEdit,
-    getChangePassword, postChangePassword
+    getJoin, postJoin, account, login, getEdit, postEdit, getChangePassword, postChangePassword
 } from "../controllers/userController";
 
 const userRouter = express.Router();
 
 
+userRouter.route("/join").get(getJoin).post(postJoin);
 userRouter.get("/login", login);
 userRouter
     .route("/edit")
     .get(getEdit)
-    .post(avatarUpload.single("avatar"), postEdit);
+    .post(postEdit);
 userRouter.route("/change_password").get(getChangePassword).post(postChangePassword);
 userRouter.route("/:id").get(account);
 
