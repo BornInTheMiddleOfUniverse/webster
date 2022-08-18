@@ -82,7 +82,8 @@ header .header__site_logo a {
 }
 header .header__page_title {
   bottom: 0;
-  font-family: "Nunito", sans-serif;
+  margin-left: 20px;
+  margin-right: 20px;
   font-size: 25px;
 }
 
@@ -96,8 +97,8 @@ div.menu {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-family: "Nunito", sans-serif;
   font-size: 20px;
+  height: 100vh;
 }
 div.menu li {
   padding: 5px;
@@ -105,7 +106,8 @@ div.menu li {
 div.menu div.brief_user_info {
   font-size: 17px;
   width: auto;
-  height: 100px;
+  height: 200px;
+  display: flex;
 }
 
 form {
@@ -136,4 +138,6 @@ body main {
 }
 body main .contents {
   grid-area: contents;
+  margin-left: 20px;
+  margin-right: 20px;
 }
