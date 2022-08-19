@@ -31,20 +31,34 @@ export const postJoin = async (req, res) => {
       });
       return res.redirect("/user/login");
     } catch (error) {
-      console.log(error);
+      return res.status(400).render("join", {
+        pageTitle, errorMessage: error._message,
+      });
     }
 };
 
 
-export const account = (req, res) => {
-
-};
-
 export const getLogin = (req, res) => {
     return res.render("user/login", { pageTitle: "Login" }); 
 };
-export const postLogin = (req, res) => {
-    return res.render("user/login", { pageTitle: "Login" }); 
+export const postLogin = async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne( { email });
+    if (!user) {
+        return res.status(400).render("login", {
+            pageTitle: "Login",
+            errorMessage: "An account with this e-mail does not exists."
+        });        
+    }
+
+    const ok = await bcrypt.compare(password, user.password);
+    if (!ok) {
+        return res.status(400).render("login", {
+            pageTitle: "Login",
+            errorMessage: "Wrong Password" 
+        });
+    }    
+    return res.redirect("/");
 };
 export const logout = (req, res) => {
 
@@ -62,5 +76,9 @@ export const getChangePassword = (req, res) => {
 
 };
 export const postChangePassword = (req, res) => {
+
+};
+
+export const account = (req, res) => {
 
 };
