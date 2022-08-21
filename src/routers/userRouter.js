@@ -3,7 +3,7 @@ import {
   getJoin,
   postJoin,
   account,
-  getLogin, postLogin,
+  getLogin, postLogin, logout,
   getEdit,
   postEdit,
   getChangePassword,
@@ -14,6 +14,7 @@ const userRouter = express.Router();
 
 userRouter.route("/join").get(getJoin).post(postJoin);
 userRouter.route("/login").get(getLogin).post(postLogin);
+userRouter.get("/logout", logout)
 userRouter.route("/edit").get(getEdit).post(postEdit);
 userRouter
   .route("/change_password")

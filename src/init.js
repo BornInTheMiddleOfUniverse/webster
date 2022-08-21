@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import app from "./server";
 
 export const GLOBAL_URL_HTTPS = "https://localhost:";

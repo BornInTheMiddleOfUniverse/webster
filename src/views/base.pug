@@ -21,7 +21,17 @@ html(lang="en")
                     li Updates
 
                 div.brief_user_info User Info
-                    a(href="/user/join") Join
+                    if !loggedIn
+                        li
+                            a(href="/user/join") Join
+                        li
+                            a(href="/user/login") Log In
+                    if loggedIn
+                        li
+                            a(href="/user/logout") Log Out
+                        li 
+                            a(href="/user/account") #{loggedInUser.username}'s Profile
+                        
 
             div.contents
                 block content

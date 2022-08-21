@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema({
     avatarPath: { type: String },
 });
 
-userSchema.pre("save", async function () {
-    this.password = await bcrypt.hash(this.password, 5);
+userSchema.pre("save", function () {
+    this.password = bcrypt.hash(this.password, 5);
     console.log("Hashed password", this.password);
 });
 

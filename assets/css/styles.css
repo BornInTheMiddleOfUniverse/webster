@@ -108,11 +108,34 @@ div.menu div.brief_user_info {
   width: auto;
   height: 200px;
   display: flex;
+  flex-direction: column;
 }
 
 form {
   display: flex;
   flex-direction: column;
+}
+
+div.enter_user_container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+div.enter_user_container h1 {
+  font-family: nunito;
+  font-size: 23px;
+  font-weight: 400;
+}
+div.enter_user_container div.sign_in_container {
+  width: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+div.enter_user_container .sign_up_container {
+  width: 50%;
 }
 
 body {
@@ -122,7 +145,7 @@ body {
   grid-template-columns: 1fr 4fr 1fr;
   grid-template-areas: "header header header" "main main main" "footer footer footer";
   margin: 30px;
-  background-color: rgba(168, 168, 245, 0.2);
+  background: white;
 }
 body a {
   color: inherit;

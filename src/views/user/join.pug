@@ -3,9 +3,17 @@ extends ../base
 block content
     if errorMessage 
         span=errorMessage
-    form(method="POST")
-        input(placeholder="e-mail", type="text", name="email", required)
-        input(placeholder="Password", type="text", name="password", required)
-        input(placeholder="Confirm password", type="text", name="password2", required)
-        input(placeholder="Username", type="text", name="username", required)
-        input(value="Join Webster!", type="submit")
+    div.enter_user_container
+        div.sign_in_container
+            h1 Welcome Back! 
+            p To keep connected with us, 
+            p please login with your personal details
+            a(href="/user/login") Sign In
+        div.sign_up_container
+            h1 Create Account
+            form(method="POST")
+                input(placeholder="e-mail", type="text", name="email", required)
+                input(placeholder="Password", type="password", name="password", required)
+                input(placeholder="Confirm password", type="password", name="password2", required)
+                input(placeholder="Username", type="text", name="username", required)
+                input(value="Join Webster!", type="submit")

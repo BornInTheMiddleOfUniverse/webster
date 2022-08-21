@@ -15,6 +15,8 @@
 
 //screens
 @import "./screens/videos.scss";
+@import "./screens/join.scss";
+
 
 //Defaults
 body{
@@ -28,8 +30,7 @@ body{
         "main main main"
         "footer footer footer";            
     margin: 30px;
-    // width: 100vw;
-    background-color : rgba($color: $wpurple, $alpha: 0.2);
+    background: white;
 
     a {
         color: inherit;
