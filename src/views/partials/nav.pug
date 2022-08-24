@@ -1,0 +1,29 @@
+div.nav
+        input#menu__togle(type="checkbox")
+        label.menu__btn(for="menu__togle") 
+            span
+            span
+            span
+        div.side_bar
+            ul.menu__box
+                li
+                    a(href="/videos") Video
+                li Twits 
+                li People
+                li Game
+                li Chat
+                li Club
+                li Shop 
+                li Updates
+
+            div.brief_user_info User Info
+                if !loggedIn
+                    li
+                        a(href="/user/join") Join
+                    li  
+                        a(href="/user/login") Log In
+                if loggedIn
+                    li
+                        a(href="/user/logout") Log Out
+                    li 
+                        a(href="/user/account") #{loggedInUser.username}'s Profile

@@ -12,7 +12,7 @@ export const logger = morgan("dev");
 export const privateMiddleware = (req, res, next) => {
     const URL = req.url;
     if(URL == "/protected") {
-        return res.render("protected", { pageTitle: "Not Allowed"})
+        return res.render("pages/protected", { pageTitle: "Not Allowed"})
     }
     next();
 }

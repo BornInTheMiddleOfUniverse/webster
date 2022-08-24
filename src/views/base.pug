@@ -4,11 +4,10 @@ html(lang="en")
         title Webster | #{pageTitle} 
         link(rel="stylesheet", href="/static/css/styles.css")
     body 
+        include partials/nav.pug
         include partials/header.pug
         
         main.main
-            include partials/hamburger_menu.pug            
-
             div.contents
                 block content
             
