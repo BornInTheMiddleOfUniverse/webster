@@ -3,7 +3,11 @@ import {
   getJoin,
   postJoin,
   account,
-  getLogin, postLogin, logout,
+  getLogin,
+  postLogin,
+  logout,
+  startGithubLogin,
+  finishGithubLogin,
   getEdit,
   postEdit,
   getChangePassword,
@@ -14,7 +18,9 @@ const userRouter = express.Router();
 
 userRouter.route("/join").get(getJoin).post(postJoin);
 userRouter.route("/login").get(getLogin).post(postLogin);
-userRouter.get("/logout", logout)
+userRouter.get("/logout", logout);
+userRouter.get("/github/start", startGithubLogin);
+userRouter.get("/github/finish", finishGithubLogin);
 userRouter.route("/edit").get(getEdit).post(postEdit);
 userRouter
   .route("/change_password")
