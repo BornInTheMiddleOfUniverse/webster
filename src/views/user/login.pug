@@ -2,7 +2,7 @@ extends ../base
 
 block content
     if errorMessage 
-        span=errorMessage
+        span.errorMessage=errorMessage
 
     form(method="POST")
         input(placeholder="e-mail", type="email", name="email", required)
@@ -15,4 +15,4 @@ block content
         br
 
     span Don't have an account yet?
-    a(href="/join") Register
+    a(href="/user/join") Register

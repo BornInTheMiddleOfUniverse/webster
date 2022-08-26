@@ -200,9 +200,12 @@ div.enter_user_container .sign_up_container {
   width: 50%;
 }
 
-a {
+* a {
   color: inherit;
   text-decoration: none;
+}
+* span.errorMessage {
+  color: rgb(255, 0, 157);
 }
 
 body {

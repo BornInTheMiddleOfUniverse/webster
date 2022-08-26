@@ -13,18 +13,20 @@ import {
   getChangePassword,
   postChangePassword,
 } from "../controllers/userController";
+import {loggedInOnlyMiddleware, publicOnlyMiddleware} from "../middlewares";
 
 const userRouter = express.Router();
 
-userRouter.route("/join").get(getJoin).post(postJoin);
-userRouter.route("/login").get(getLogin).post(postLogin);
+userRouter.route("/join").get(publicOnlyMiddleware, getJoin).post(postJoin);
+userRouter.route("/login").get(publicOnlyMiddleware, getLogin).post(postLogin);
 userRouter.get("/logout", logout);
-userRouter.get("/github/start", startGithubLogin);
+userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", finishGithubLogin);
-userRouter.route("/edit").get(getEdit).post(postEdit);
+
+userRouter.route("/edit").get(loggedInOnlyMiddleware, getEdit).post(postEdit);
 userRouter
   .route("/change_password")
-  .get(getChangePassword)
+  .get(loggedInOnlyMiddleware, getChangePassword)
   .post(postChangePassword);
 userRouter.route("/:id").get(account);
 

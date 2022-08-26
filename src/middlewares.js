@@ -9,10 +9,18 @@ export const localsMiddleware = (req, res, next) => {
 
 export const logger = morgan("dev");
 
-export const privateMiddleware = (req, res, next) => {
-    const URL = req.url;
-    if(URL == "/protected") {
-        return res.render("pages/protected", { pageTitle: "Not Allowed"})
+export const loggedInOnlyMiddleware = (req, res, next) => {
+    if (req.session.loggedIn) {
+        next();
+    } else {
+        return res.redirect("/user/login")
     }
-    next();
-}
+};
+
+export const publicOnlyMiddleware = (req, res, next) => {
+    if (!req.session.loggedIn) {
+        next();
+    } else {
+        return res.redirect("/");
+    }
+};

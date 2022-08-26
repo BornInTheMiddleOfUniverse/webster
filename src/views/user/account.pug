@@ -1,3 +1,26 @@
 extends ../base
 
 block content
+    div.profile_card
+        if(String(loggedInUser._id) === String(user._id))
+            a(href="/user/edit") Edit profile
+
+        div.banner_img
+        div.profile_img
+        div.user_name
+            span=user.username
+        div.user_phrase
+        div.occupation_location_followers
+            span Developer ∙ Korea,Deagu ∙ 15 followers 
+        div.following_state
+            span ✔︎following
+        div.account_nav
+            span home / introduce / updates / twits / videos
+    hr
+    
+    div.account_contents
+        if(String(loggedInUser._id) === String(user._id))
+            span=user.email 
+        hr
+    
+    

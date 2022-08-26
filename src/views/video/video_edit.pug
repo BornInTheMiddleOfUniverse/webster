@@ -2,7 +2,7 @@ extends ../base.pug
 
 block content 
     if errorMessage 
-        span=errorMessage
+        span.errorMessage=errorMessage
     form(method="POST").video-edit__form
         input(placeholder="Video Title", value=video.title, required, name="title")
         input(placeholder="Description", value=video.description, name="description")
