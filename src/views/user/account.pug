@@ -2,9 +2,8 @@ extends ../base
 
 block content
     div.profile_card
-        if(String(loggedInUser._id) === String(user._id))
-            a(href="/user/edit") Edit profile
-
+        img(src=user.profilePicPath, height="100")
+        
         div.banner_img
         div.profile_img
         div.user_name
@@ -16,11 +15,15 @@ block content
             span ✔︎following
         div.account_nav
             span home / introduce / updates / twits / videos
+
+        if(String(loggedInUser._id) === String(user._id))
+            a(href="/user/edit") Edit profile
     hr
     
     div.account_contents
         if(String(loggedInUser._id) === String(user._id))
             span=user.email 
+            span=user.location
         hr
     
     

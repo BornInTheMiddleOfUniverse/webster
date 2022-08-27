@@ -1,4 +1,6 @@
 import morgan from "morgan";
+import multer from "multer";
+
 
 export const localsMiddleware = (req, res, next) => {
     res.locals.siteTitle = "Webster";
@@ -24,3 +26,16 @@ export const publicOnlyMiddleware = (req, res, next) => {
         return res.redirect("/");
     }
 };
+
+export const profilePicUpload = multer ({
+    dest: "uploads/profile_pic/",
+    limits: {
+        fileSize: 3000000,
+    },
+});
+export const videoUpload = multer({
+    dest: "uploads/videos/",
+    limits: {
+        fileSize: 5000000000,
+    },
+});

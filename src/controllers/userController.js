@@ -8,7 +8,14 @@ export const getJoin = (req, res) => {
 }
 export const postJoin = async (req, res) => {
     const pageTitle = "Join Webster!";
-    const { email, password, password2, username } = req.body;
+    const { email, password, password2, username, location } = req.body;
+
+    let picFile = req.file;
+    if (!picFile) {
+        picFile = {
+            path: "../img/profile_pic.jpeg",
+        }
+    }
 
     const exists = await User.exists({ $or: [{ email }, { username }] });
     if (exists) {
@@ -30,6 +37,8 @@ export const postJoin = async (req, res) => {
         email,
         password,
         username,
+        location,
+        profilePicPath: "/" + picFile.path,
       });
       console.log("user created");
 
@@ -137,7 +146,7 @@ export const finishGithubLogin = async (req, res) => {
                 password: "",
                 username: userData.login,
                 socialOnly: true,
-                avatarPath: userData.avatar_url, 
+                profilePicPath: userData.avatar_url, 
                 location: userData.location,
             });
             console.log("created");
@@ -153,62 +162,58 @@ export const finishGithubLogin = async (req, res) => {
 
 
 
-
 export const getEdit = async (req, res) => {
     return res.render("user/edit", { pageTitle: "Edit Profile" });    
 };
 export const postEdit = async (req, res) => {    
-    const { session : { user : { _id, avatarPath } }, body: { email, username }, file } = req;
-    const userBeforeUpdate = req.session.user;
+    const { session : { user : { _id, profilePicPath } }, body: { email, username, location, profile_pic} } = req;
+
+    const originalUser = req.session.user; 
     const pageTitle = "Edit Profile";
     const existingEmail = await User.exists( { email } );
     const existingUsername = await User.exists( { username } );
-    const hasEmailNotChanged = Boolean(email === userBeforeUpdate.email);
-    const hasUsernameNotChanged = Boolean(username === userBeforeUpdate.username);
+    const hasEmailNotChanged = Boolean(email === originalUser.email);
+    const hasUsernameNotChanged = Boolean(username === originalUser.username);
 
-    let hasAvatarNotChanged = true;
-    let newAvatarPath = avatarPath;
-    if (file) {    
-        hasAvatarNotChanged = false;
-        newAvatarPath = "/" + file.path;
-    } else if (avatarPath === null) {
-        newAvatarPath = `${WEBSTER_MARK}`;
+    let hasPicNotChanged = true;
+    let newProfilePicPath = profilePicPath;
+    if (profile_pic) {    
+        hasPicNotChanged = false;
+        //undefined
+        newProfilePicPath = "/" + profile_pic.path;
+    } else if (profilePicPath === null) {
+        newProfilePicPath = "../img/profile_pic.jpeg";
     }
 
     let errorMessageArray = [];
-    if ( email !== userBeforeUpdate.email && existingEmail ) {
+    if ( email !== originalUser.email && existingEmail ) {
         errorMessageArray.push("This e-mail has already taken by someone.");
     }
-    if ( username !== userBeforeUpdate.username && existingUsername ) {
+    if ( username !== originalUser.username && existingUsername ) {
         errorMessageArray.push("This username has already taken by someone.");
     }    
     if ( errorMessageArray.length > 0 ) {
-        return res.status(400).render("users/edit_profile", { pageTitle, errorMessage: errorMessageArray });
+        return res.status(400).render("user/edit", { pageTitle, errorMessage: errorMessageArray });
     } else if (
         errorMessageArray.length === 0 
         && hasEmailNotChanged === true 
         && hasUsernameNotChanged === true
-        && hasAvatarNotChanged === true
+        && hasPicNotChanged === true
         ) {
-        return res.status(400).render("users/edit_profile", { pageTitle, errorMessage: "Nothing has changed."})
+        return res.status(400).render("user/edit", { pageTitle, errorMessage: "Nothing has changed."})
     }
 
     const updatedUser = await User.findByIdAndUpdate(
         _id, {
-        avatarPath : newAvatarPath,
+        profilePicPath : newProfilePicPath,
         email,
-        username
+        username,
+        location,
     }, {new: true});
     req.session.user = updatedUser;
     return res.redirect(`/user/${_id}`);
 };
 
-export const getChangePassword = (req, res) => {
-
-};
-export const postChangePassword = (req, res) => {
-
-};
 
 export const account = async (req, res) => {
     const { id } = req.params;
@@ -219,4 +224,24 @@ export const account = async (req, res) => {
         return res.status(404).render("404", { pageTitle: "User not found."});
     }
     res.render("user/account", { pageTitle: "Account", user });
+};
+
+export const getChangePassword = (req, res) => {
+    return res.render("user/change_password", { pageTitle: "Change Password" }); 
+};
+export const postChangePassword = async (req, res) => {
+    const pageTitle = "Change Password";
+    const { session : { user : { _id } }, body: { password, password2 } } = req;
+    const userBeforeUpdate = await User.findById(_id);    
+    const isItSamePWAsBefore = await bcrypt.compare(password, userBeforeUpdate.password);
+    if (password !== password2) {
+        return res.status(400).render("user/change_password", { pageTitle, errorMessage: "Password confirmation does not match." });
+    }    
+    if (isItSamePWAsBefore) {
+        return res.status(400).render("user/change_password", { pageTitle, errorMessage: "The password must be different from the previous one." });
+    }    
+    userBeforeUpdate.password = password;
+    await userBeforeUpdate.save();
+    req.session.destroy();
+    return res.redirect(`/user/${_id}`);
 };
