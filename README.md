@@ -33,4 +33,5 @@
  
 
  //further
- [ ] Location update based on the google map
+[ ] Location update based on the google map
+[ ] Need to redirect to home when Logged out but didn't refresh

@@ -163,10 +163,10 @@ export const finishGithubLogin = async (req, res) => {
 
 
 export const getEdit = async (req, res) => {
-    return res.render("user/edit", { pageTitle: "Edit Profile" });    
+    return res.render("user/edit", { pageTitle: "Edit Profile" });
 };
 export const postEdit = async (req, res) => {    
-    const { session : { user : { _id, profilePicPath } }, body: { email, username, location, profile_pic} } = req;
+    const { session : { user : { _id, profilePicPath } }, body: { email, username, location, profile_pic }, file } = req;
 
     const originalUser = req.session.user; 
     const pageTitle = "Edit Profile";
@@ -177,10 +177,9 @@ export const postEdit = async (req, res) => {
 
     let hasPicNotChanged = true;
     let newProfilePicPath = profilePicPath;
-    if (profile_pic) {    
+    if (file) {    
         hasPicNotChanged = false;
-        //undefined
-        newProfilePicPath = "/" + profile_pic.path;
+        newProfilePicPath = "/" + file.path;
     } else if (profilePicPath === null) {
         newProfilePicPath = "../img/profile_pic.jpeg";
     }
