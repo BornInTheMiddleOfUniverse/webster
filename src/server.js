@@ -30,8 +30,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("assets"));
 
+
 app.use("/", rootRouter);
 app.use("/user", userRouter);
 app.use("/videos", videoRouter);
+
 
 export default app;

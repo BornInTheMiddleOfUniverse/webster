@@ -22,8 +22,10 @@ export const getUpload = (req, res) => {
 };
 export const postUpload = async (req, res) => {
     const { title, description, hashtags } = req.body;
+    const { path: videoPath, size: videoSize } = req.file;
     try {
         const video = await Video.create({
+            videoPath,
             title,
             description,
             createdAt: Date.now(),
@@ -33,14 +35,20 @@ export const postUpload = async (req, res) => {
                 ratings: 0,
             },
             });
-        const dbVideo = await video.save();
+        console.log(video);
         
-        console.log(dbVideo);
+        if( videoSize > 100 * 1024 * 1024 ){
+          return res.status(500).render("video/video_upload", {
+            errorMessage: "File size should be less than 100Mb!",
+          });      
+        }
+        await video.save();
+        
         return res.redirect("/videos"); 
 
     } catch(error) {
         console.log(error);
-        return res.status(400).render("video_upload", {
+        return res.status(400).render("video/video_upload", {
         pageTitle: "Upload Video",
         errorMessage: error._message,
         });

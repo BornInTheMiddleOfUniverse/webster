@@ -166,7 +166,7 @@ export const getEdit = async (req, res) => {
     return res.render("user/edit", { pageTitle: "Edit Profile" });
 };
 export const postEdit = async (req, res) => {    
-    const { session : { user : { _id, profilePicPath } }, body: { email, username, location, profile_pic }, file } = req;
+    const { session : { user : { _id, profilePicPath } }, body: { email, username, location }, file } = req;
 
     const originalUser = req.session.user; 
     const pageTitle = "Edit Profile";
