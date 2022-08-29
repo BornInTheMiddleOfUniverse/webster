@@ -1,6 +1,7 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
 import fetch from "node-fetch";
+import Video from "../models/Video";
 
 
 export const getJoin = (req, res) => {
@@ -216,9 +217,8 @@ export const postEdit = async (req, res) => {
 
 export const account = async (req, res) => {
     const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate("videos");
     console.log(user);
-
     if ( !user ) {
         return res.status(404).render("404", { pageTitle: "User not found."});
     }

@@ -1,4 +1,6 @@
 extends ../base
+include ../mixin/video
+
 
 block content
     div.profile_card
@@ -27,4 +29,14 @@ block content
             span=user.location
         hr
     
+        h2 User Uploaded Videos
+        span=user.videos
+
+        
+        if user.videos
+                ul.video_list
+                    each video in user.videos
+                        +video(video)
+        else 
+            li There are no videos uploaded by this user.
     

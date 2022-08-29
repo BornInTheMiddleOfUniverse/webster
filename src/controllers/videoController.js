@@ -1,5 +1,5 @@
 import Video, { formatHashtags } from "../models/Video";
-    
+import User from "../models/User";
 
 export const videos = async (req, res) => {    
         const videos = await Video.find({}).sort({ createdAt: "desc" });
@@ -9,11 +9,11 @@ export const videos = async (req, res) => {
 
 export const watch = async (req, res) => {
     const { id } = req.params;
-    const video = await Video.findById(id);
+    const video = await Video.findById(id).populate("owner");
     if (!video) {
-        return res.status(404).render("pages/error/404", {pageTitle: "Video not found."})
+        return res.status(404).render("pages/error/404", { pageTitle: "Video not found." })
     }
-    return res.render("video/watch", {pageTitle: video.title, video})
+    return res.render("video/watch", {pageTitle: video.title, video })
 };
 
 
@@ -21,6 +21,7 @@ export const getUpload = (req, res) => {
     return res.render("video/video_upload", { pageTitle: "Upload Video" });
 };
 export const postUpload = async (req, res) => {
+    const { user: { _id }} = req.session;
     const { title, description, hashtags } = req.body;
     const { path: videoPath, size: videoSize } = req.file;
     try {
@@ -34,6 +35,7 @@ export const postUpload = async (req, res) => {
                 views: 0,
                 ratings: 0,
             },
+            owner: _id,
             });
         console.log(video);
         
@@ -42,7 +44,9 @@ export const postUpload = async (req, res) => {
             errorMessage: "File size should be less than 100Mb!",
           });      
         }
-        await video.save();
+        const user = await User.findById(_id);
+        user.videos.push(video._id);
+        user.save();
         
         return res.redirect("/videos"); 
 

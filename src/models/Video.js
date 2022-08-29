@@ -11,6 +11,7 @@ const videoSchema= new mongoose.Schema({
         views: { type: Number },
         rating: { type: Number }
     },
+    owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User"},
 });
 
 

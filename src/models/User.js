@@ -8,11 +8,14 @@ const userSchema = new mongoose.Schema({
     location: { type: String },
     socialOnly: { type: Boolean, default: false },
     profilePicPath: { type: String },
+    videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
 });
 
 userSchema.pre("save", function () {
-    this.password = bcrypt.hash(this.password, 5);
-    console.log("Hashed password", this.password);
+    if (this.isModified("password")) {
+        this.password = bcrypt.hash(this.password, 5);
+        console.log("Hashed password", this.password);
+    }    
 });
 
 

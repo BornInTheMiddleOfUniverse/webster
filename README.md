@@ -2,8 +2,8 @@
 
 //main
 [ ] Social user's join
-[ ] Profile img upload
-[ ] Video Upload
+[x] Profile img upload
+[x] Video Upload
 [ ] Video Owner
 [ ] User's video list
 [ ] Video player
@@ -13,7 +13,7 @@
 [ ] Duration and Current Time
 [ ] Timeline
 [ ] Fullscreen
-[ ]controls
+[ ] controls
 ---------------------
 [ ] Views API
 [ ] Video Recorder
@@ -36,3 +36,6 @@
 [ ] Location update based on the google map
 [ ] Need to redirect to home when Logged out but didn't refresh
 [ ] Social logins with Passport
+
+//bug fix
+[ ] watch.pug 'small' href (maybe after video size modification, it will work)
