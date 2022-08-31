@@ -1,10 +1,12 @@
 extends ../base
 include ../mixin/video
 
-block content
-    ul.video_list
+block content        
+    div.video_list
         each video in videos 
             +video(video)
         else
-            li Sorry nothing found.
-    a(href="/videos/upload") Upload Video
+            span Sorry nothing found.
+            
+    if loggedIn
+        a(href="/videos/upload") Upload Video

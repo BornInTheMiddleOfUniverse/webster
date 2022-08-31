@@ -36,6 +36,7 @@
 [ ] Location update based on the google map
 [ ] Need to redirect to home when Logged out but didn't refresh
 [ ] Social logins with Passport
+[ ] Save volume preference to the LocalStrage
 
 //bug fix
 [ ] watch.pug 'small' href (maybe after video size modification, it will work)

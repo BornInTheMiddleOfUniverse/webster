@@ -217,7 +217,15 @@ export const postEdit = async (req, res) => {
 
 export const account = async (req, res) => {
     const { id } = req.params;
-    const user = await User.findById(id).populate("videos");
+    const user = await User.findById(id).populate(
+        {
+            path: "videos",
+            populate: {
+                path: "owner",
+                model: "User",
+            }
+        }
+    );
     console.log(user);
     if ( !user ) {
         return res.status(404).render("404", { pageTitle: "User not found."});
@@ -233,12 +241,14 @@ export const postChangePassword = async (req, res) => {
     const { session : { user : { _id } }, body: { password, password2 } } = req;
     const userBeforeUpdate = await User.findById(_id);    
     const isItSamePWAsBefore = await bcrypt.compare(password, userBeforeUpdate.password);
+
     if (password !== password2) {
         return res.status(400).render("user/change_password", { pageTitle, errorMessage: "Password confirmation does not match." });
     }    
     if (isItSamePWAsBefore) {
         return res.status(400).render("user/change_password", { pageTitle, errorMessage: "The password must be different from the previous one." });
     }    
+
     userBeforeUpdate.password = password;
     await userBeforeUpdate.save();
     req.session.destroy();

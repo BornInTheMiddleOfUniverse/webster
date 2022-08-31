@@ -2,6 +2,16 @@ extends ../base
 
 block content     
     video(src="/" + video.videoPath, controls)
+    div 
+        button#play Play 
+        button#replay Replay
+        button#mute Mute 
+        div
+            span#currentTime 00:00
+            span  / 
+            span#totalTime 00:00        
+        input(type="range", step="0.1", min="0", max="1")#volume
+
     div
         p=video.description
         small=video.createdAt
@@ -14,3 +24,5 @@ block content
         if String(video.owner._id) === String(loggedInUser._id)
             a(href=`${video.id}/edit`) Edit Video &rarr; 
     
+block scripts
+    script(src="/static/js/videoPlayer.js")

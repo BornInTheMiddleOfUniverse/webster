@@ -23,6 +23,7 @@ block content
 
     hr
     
+
     div.account_contents
         if(String(loggedInUser._id) === String(user._id))
             span=user.email 
@@ -30,13 +31,8 @@ block content
         hr
     
         h2 User Uploaded Videos
-        span=user.videos
-
-        
-        if user.videos
-                ul.video_list
-                    each video in user.videos
-                        +video(video)
-        else 
-            li There are no videos uploaded by this user.
-    
+        div.video_list
+            each video in user.videos
+                +video(video)
+            else 
+                span There are no videos uploaded by this user.

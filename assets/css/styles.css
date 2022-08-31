@@ -220,6 +220,6 @@ body {
 body main {
   grid-area: main;
   display: grid;
-  height: 100vh;
+  height: 200vh;
   margin: 50px 40px 40px 40px;
 }
