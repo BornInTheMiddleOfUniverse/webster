@@ -1,4 +1,5 @@
 header {
+    z-index: 2;
     grid-area: header;
     display: grid;
     grid-template-columns: 0.73fr 4fr 1fr;
@@ -27,8 +28,5 @@ header {
     .header__page_title {
         bottom: 0;
         font-size: 25px;
-    }
-    .header__search_bar {
-
     }
 }

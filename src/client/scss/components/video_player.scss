@@ -1,0 +1,57 @@
+#videoContainer {
+    width: 100%;
+    position: relative;
+
+    video {
+        width: 100%;
+    }
+
+    #videoControls {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        color: whitesmoke;
+
+        &.showing {
+            opacity: 1;
+        }
+
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        bottom: 10px;
+        width: 95%;
+        justify-content: space-between;
+        background-color: transparent;
+        box-sizing: border-box;
+
+        .timeline {
+            font-size: 12px;
+            width: 100%;
+        }
+
+        .control_btns {
+            display: flex;
+            flex-direction: row;
+            #play {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+
+            #volume {
+                display: flex;
+                align-items: center;
+
+                span {
+                    margin-left: 10px;
+
+                    i {
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+
+    }
+}
