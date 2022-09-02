@@ -13,6 +13,8 @@
 @import "./components/forms.scss";
 @import "./components/nav.scss";
 @import "./components/video_player.scss";
+@import "./components/hamburger_togle.scss";
+
 
 //screens
 @import "./screens/videos.scss";
@@ -43,15 +45,15 @@ body{
         "footer footer footer footer"
     ;
     grid-template-columns: 0.27fr 0.73fr 4fr 1fr;
-    background: transparent;
-
+    overflow-x: hidden;
     
     
     main {
         grid-area: main;
         display: grid;       
         height: 200vh;
-        margin: 50px 110px 40px 40px;        
+        margin: 50px 110px 40px 40px;   
+        background-color: white;    
     }
 };
     
