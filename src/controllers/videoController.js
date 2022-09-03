@@ -1,4 +1,4 @@
-import Video, { formatHashtags } from "../models/Video";
+import Video from "../models/Video";
 import User from "../models/User";
 
 export const videos = async (req, res) => {    
@@ -9,7 +9,7 @@ export const videos = async (req, res) => {
 
 
 export const watch = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params; 
     const video = await Video.findById(id).populate("owner");
     if (!video) {
         return res.status(404).render("pages/error/404", { pageTitle: "Video not found." })
@@ -112,4 +112,15 @@ export const search = async (req, res) => {
     console.log(e);
     return res.status(404).render("pages/error/404", { pageTitle: `Something went wrong.` });
   }
+};
+
+export const registerView = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  video.meta.views = video.meta.views + 1;
+  await video.save();
+  return res.sendStatus(200);
 };
