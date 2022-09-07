@@ -1,4 +1,5 @@
 mixin video(video)
+    //- div.thumb(style=`background-image:url(${video.thumbPath})`)         
     div
         h4
             a(href=`/videos/${video.id}`)=video.title 
@@ -6,6 +7,7 @@ mixin video(video)
             li #{video.rating}/5
             li #{video.comments} comments.
             li Posted #{video.createdAt} by #{video.owner.username}
+            li #{video.meta.views} views
             li #{video.hashtags}
         p=video.description
         hr

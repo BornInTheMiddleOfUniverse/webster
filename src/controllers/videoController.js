@@ -25,10 +25,11 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
     const { user: { _id }} = req.session;
     const { title, description, hashtags } = req.body;
-    const { path: videoPath, size: videoSize } = req.file;
+    const { video, thumb } = req.files;
     try {
         const video = await Video.create({
-            videoPath,
+            videoPath: video[0].path,
+            thumbPath: thumb[0].path,
             title,
             description,
             createdAt: Date.now(),
