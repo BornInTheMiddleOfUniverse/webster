@@ -18,16 +18,17 @@ block content
         div.account_nav
             span home / introduce / updates / twits / videos
 
-        if(String(loggedInUser._id) === String(user._id))
-            a(href="/user/edit") Edit profile
+        if loggedInUser
+            if (String(loggedInUser._id) === String(user._id))
+                a(href="/user/edit") Edit profile
 
-    hr
-    
+    hr    
 
     div.account_contents
-        if(String(loggedInUser._id) === String(user._id))
-            span=user.email 
-            span=user.location
+        if loggedInUser
+             if (String(loggedInUser._id) === String(user._id))
+                span=user.email 
+                span=user.location
         hr
     
         h2 User Uploaded Videos

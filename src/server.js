@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import "./db";
 import "./models/Video";
@@ -30,6 +31,7 @@ app.use(
         store: MongoStore.create({mongoUrl: process.env.DB_URL}),
     })
 );
+app.use(flash());
 app.use(localsMiddleware);
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));

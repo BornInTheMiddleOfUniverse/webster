@@ -20,7 +20,6 @@ export const postJoin = async (req, res) => {
 
     const exists = await User.exists({ $or: [{ email }, { username }] });
     if (exists) {
-        console.log("exists");
         return res.status(400).render("user/join", {            
             pageTitle,
             errorMessage: "! This email/username is already taken.",
@@ -41,7 +40,6 @@ export const postJoin = async (req, res) => {
         location,
         profilePicPath: "/" + picFile.path,
       });
-      console.log("user created");
 
       return res.redirect("/user/login");
     } catch (error) {
@@ -78,6 +76,7 @@ export const postLogin = async (req, res) => {
 };
 export const logout = (req, res) => {
     req.session.destroy();
+    req.flash("info", "Bye Bye");
     return res.redirect("/");
 };
 
@@ -115,7 +114,6 @@ export const finishGithubLogin = async (req, res) => {
     ).json();
 
     if ("access_token" in tokenRequest) {
-        console.log("got access_token");
         const { access_token } = tokenRequest;
         const userData = await (
             await fetch(`${apiURL}/user`, {
@@ -141,7 +139,6 @@ export const finishGithubLogin = async (req, res) => {
 
         let user = await User.findOne({ email: emailObj.email });
         if (!user) { 
-            console.log("not user");
             user = await User.create({
                 email: emailObj.email,
                 password: "",
@@ -150,11 +147,9 @@ export const finishGithubLogin = async (req, res) => {
                 profilePicPath: userData.avatar_url, 
                 location: userData.location,
             });
-            console.log("created");
         }
         req.session.loggedIn = true;
         req.session.user = user;
-        console.log(user);
         return res.redirect("/");
         } else {
             return res.redirect("/login");
@@ -226,7 +221,6 @@ export const account = async (req, res) => {
             }
         }
     );
-    console.log(user);
     if ( !user ) {
         return res.status(404).render("404", { pageTitle: "User not found."});
     }
@@ -234,6 +228,7 @@ export const account = async (req, res) => {
 };
 
 export const getChangePassword = (req, res) => {
+    req.flash("error", "Can't change password.");
     return res.render("user/change_password", { pageTitle: "Change Password" }); 
 };
 export const postChangePassword = async (req, res) => {
@@ -252,5 +247,6 @@ export const postChangePassword = async (req, res) => {
     userBeforeUpdate.password = password;
     await userBeforeUpdate.save();
     req.session.destroy();
+    req.flash("info", "Password updated");
     return res.redirect(`/user/${_id}`);
 };
