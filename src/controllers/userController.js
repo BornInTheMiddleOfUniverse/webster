@@ -1,7 +1,6 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
 import fetch from "node-fetch";
-import Video from "../models/Video";
 
 
 export const getJoin = (req, res) => {
@@ -40,7 +39,7 @@ export const postJoin = async (req, res) => {
         location,
         profilePicPath: "/" + picFile.path,
       });
-
+    
       return res.redirect("/user/login");
     } catch (error) {
       return res.status(400).render("join", {
@@ -75,8 +74,9 @@ export const postLogin = async (req, res) => {
     return res.redirect("/");
 };
 export const logout = (req, res) => {
-    req.session.destroy();
-    req.flash("info", "Bye Bye");
+    req.session.user = null; 
+    req.session.loggedIn = false; 
+    req.flash("info", "Bye Bye"); 
     return res.redirect("/");
 };
 
