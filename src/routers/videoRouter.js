@@ -1,6 +1,6 @@
 import express from "express";
 import { videos, watch, getUpload, postUpload, getEdit, postEdit, deleteVideo, search } from "../controllers/videoController";
-import {loggedInOnlyMiddleware, publicOnlyMiddleware, videoUpload } from "../middlewares";
+import {loggedInOnlyMiddleware, videoUpload } from "../middlewares";
 
 
 const videoRouter = express.Router();
@@ -8,7 +8,7 @@ const videoRouter = express.Router();
 videoRouter.get("/", videos);
 videoRouter
   .route("/upload")
-  .get(getUpload)
+  .get(loggedInOnlyMiddleware, getUpload)
   .post(
     videoUpload.fields([
       { name: "video", maxCount: 1 },

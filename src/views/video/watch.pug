@@ -20,15 +20,18 @@ block content
                 span#fullScreen
                     i.fas.fa-expand
 
-    div
-        p=video.description
-        small=video.createdAt
+    div#videoInfo
+        div.videoInfo__hashtags=video.hashtags
+        small.videoInfo__title=video.title
+        small.videoInfo__views=video.meta.views      
+        a.videoInfo__likeBtn#like(href=`/videos/${String(video._id)}/like`) #{video.meta.likes} likes
         br
-        small Uploaded by
+        small.videoInfo__uploaded_user Uploaded by 
             a(href=`/user/${String(video.owner._id)}`) #{video.owner.username}
-        p=video.description
-        p=video.hashtags
+        small.videoInfo__last_update Last update #{new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}
+        div.videoInfo__description=video.description        
         
+
         if loggedInUser && String(video.owner._id) === String(loggedInUser._id)
             a(href=`${video.id}/edit`) Edit Video &rarr; 
     

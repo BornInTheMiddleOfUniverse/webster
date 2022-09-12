@@ -162,19 +162,21 @@ div.hamburger {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: black;
 }
 #videoContainer video {
-  width: 100%;
+  max-width: 100%;
+  max-height: 90vh;
 }
 #videoContainer #videoControls {
   position: absolute;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 1s ease-in-out;
   color: whitesmoke;
   display: grid;
   grid-template-rows: 1fr 3fr;
-  bottom: 10px;
-  width: 96%;
+  bottom: 25px;
+  width: 97%;
   height: 50px;
   background-color: transparent;
 }
@@ -194,6 +196,7 @@ div.hamburger {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 10px;
 }
 #videoContainer #videoControls .control_btns #play {
   display: flex;
@@ -214,15 +217,20 @@ div.hamburger {
   margin-left: 10px;
 }
 #videoContainer #videoControls .control_btns #time {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 #videoContainer #videoControls .control_btns #fullScreen {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-around;
   font-size: 25px;
   width: 30px;
   right: 0;
+}
+
+#videoInfo {
+  margin-top: 20px;
 }
 
 input[type=checkbox] {
@@ -343,7 +351,7 @@ body main {
 .message {
   z-index: 11;
   position: absolute;
-  top: 140px;
+  top: 130px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -352,9 +360,9 @@ body main {
   border-radius: 10000px;
   text-align: center;
   animation: goAway 0.5s ease-in-out forwards;
-  animation-delay: 5s;
+  animation-delay: 3s;
 }
 .message.error {
-  background-color: tomato;
+  background-color: #ff0f6f;
   color: white;
 }

@@ -13,7 +13,8 @@ export const watch = async (req, res) => {
     if (!video) {
         return res.status(404).render("pages/error/404", { pageTitle: "Video not found." })
     }
-    return res.render("video/watch", {pageTitle: video.title, video })
+    console.log(video);
+    return res.render("video/watch", {pageTitle: "Videos", video })
 };
 
 
@@ -34,7 +35,7 @@ export const postUpload = async (req, res) => {
             hashtags: Video.formatHashtags(hashtags),
             meta: {
                 views: 0,
-                ratings: 0,
+                likes: 0,
             },
             owner: _id,
             });
@@ -118,6 +119,17 @@ export const registerView = async (req, res) => {
     return res.sendStatus(404);
   }
   video.meta.views = video.meta.views + 1;
+  await video.save();
+  return res.sendStatus(200);
+};
+
+export const registerLike = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  video.meta.likes = video.meta.likes + 1;
   await video.save();
   return res.sendStatus(200);
 };

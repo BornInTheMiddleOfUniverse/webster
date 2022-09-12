@@ -1,6 +1,7 @@
 const video = document.querySelector("video");
 const playBtn = document.getElementById("play");
 const muteBtn = document.getElementById("mute");
+const likeBtn = document.getElementById("like");
 const volumeRange = document.getElementById("volume");
 const totalTime = document.getElementById("totalTime");
 const currentTime = document.getElementById("currentTime");
@@ -112,7 +113,12 @@ const handleEnded = () => {
     method: "POST",
   });
 }
-
+const handleLikeBtnClick = (event) => {
+  const {id} = videoContainer.dataset;
+  fetch(`/api/videos/${id}/like`, {
+    method: "POST",
+  });
+}
 
 
 window.addEventListener("keydown", function (event) {
@@ -120,6 +126,7 @@ window.addEventListener("keydown", function (event) {
     handlePlayClick();
   }
 });
+likeBtn.addEventListener("click", handleLikeBtnClick);
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMuteClick);
 volumeRange.addEventListener("input", handleVolumeChange);

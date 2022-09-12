@@ -72,7 +72,7 @@ body{
   .message {
     z-index: 11;
     position: absolute;
-    top: 140px;
+    top: 130px;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -81,9 +81,9 @@ body{
     border-radius: 10000px;
     text-align: center;
     animation: goAway 0.5s ease-in-out forwards;
-    animation-delay: 5s;
+    animation-delay: 3s;
     &.error {
-      background-color: tomato;
+      background-color: $rwred;
       color: white;
     }
   }

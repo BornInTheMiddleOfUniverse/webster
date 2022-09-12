@@ -3,7 +3,6 @@ import session from "express-session";
 import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import "./db";
-import "./models/Video";
 import { localsMiddleware, logger } from "./middlewares";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
