@@ -95,7 +95,7 @@ header .header__page_title {
 
 footer {
   grid-area: footer;
-  bottom: -200px;
+  bottom: 0vh;
   height: 200px;
 }
 
@@ -231,6 +231,42 @@ div.hamburger {
 
 #videoInfo {
   margin-top: 20px;
+  width: 100%;
+  position: relative;
+}
+#videoInfo .videoInfo__hashtags {
+  color: rgb(47, 47, 239);
+  margin-bottom: 7px;
+}
+#videoInfo .videoInfo__title {
+  font-size: 23px;
+  margin-bottom: 20px;
+}
+#videoInfo div.videoInfo__state {
+  display: flex;
+  justify-content: start;
+  position: relative;
+}
+#videoInfo div.videoInfo__state small:nth-child(2) {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#videoInfo div.videoInfo__state .videoInfo__likeBtn {
+  position: absolute;
+  right: 0;
+}
+
+#uploader_info {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#uploader_info .uploaderInfo__uploader {
+  margin-left: 30px;
+  margin-right: 5px;
 }
 
 input[type=checkbox] {

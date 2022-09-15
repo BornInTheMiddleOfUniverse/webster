@@ -22,13 +22,18 @@ block content
 
     div#videoInfo
         div.videoInfo__hashtags=video.hashtags
-        small.videoInfo__title=video.title
-        small.videoInfo__views=video.meta.views      
-        a.videoInfo__likeBtn#like(href=`/videos/${String(video._id)}/like`) #{video.meta.likes} likes
-        br
-        small.videoInfo__uploaded_user Uploaded by 
+        h2.videoInfo__title=video.title
+        div.videoInfo__state
+            small.videoInfo__views #{video.meta.views} views
+            small •    
+            small.videoInfo__last_update   Last update  #{new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'short', day: 'numeric'})}    
+            a.videoInfo__likeBtn#like(href=`/videos/${String(video._id)}/like`) #{video.meta.likes} likes
+
+        hr
+        div#uploader_info
+            img(src=`${video.owner.profilePicPath}`, height="60")
+            small.uploaderInfo__uploader Uploaded by 
             a(href=`/user/${String(video.owner._id)}`) #{video.owner.username}
-        small.videoInfo__last_update Last update #{new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}
         div.videoInfo__description=video.description        
         
 

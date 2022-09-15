@@ -84,5 +84,41 @@
 
 #videoInfo {
     margin-top: 20px;
+    width: 100%;
+    position: relative;
+    .videoInfo__hashtags {
+        color: rgb(47, 47, 239);
+        margin-bottom: 7px;
+    }
+    .videoInfo__title {
+        font-size: 23px;
+        margin-bottom: 20px;
+        }
+    div.videoInfo__state {
+        display: flex;
+        justify-content: start;
+        position: relative;
+        small:nth-child(2) {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .videoInfo__likeBtn {
+            position: absolute;
+            right: 0;
+        }
+    }
+}
 
+#uploader_info {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .uploaderInfo__uploader {
+        margin-left: 30px;
+        margin-right: 5px;
+        
+    }
 }
