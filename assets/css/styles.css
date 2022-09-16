@@ -255,6 +255,9 @@ div.hamburger {
   position: absolute;
   right: 0;
 }
+#videoInfo div.videoInfo__description {
+  margin-top: 15px;
+}
 
 #uploader_info {
   display: flex;
@@ -267,6 +270,10 @@ div.hamburger {
 #uploader_info .uploaderInfo__uploader {
   margin-left: 30px;
   margin-right: 5px;
+}
+
+#commentForm {
+  margin-top: 50px;
 }
 
 input[type=checkbox] {

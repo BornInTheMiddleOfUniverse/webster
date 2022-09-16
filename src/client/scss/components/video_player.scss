@@ -107,6 +107,9 @@
             right: 0;
         }
     }
+    div.videoInfo__description {
+        margin-top: 15px;
+    }
 }
 
 #uploader_info {
@@ -118,7 +121,10 @@
     margin-bottom: 20px;
     .uploaderInfo__uploader {
         margin-left: 30px;
-        margin-right: 5px;
-        
+        margin-right: 5px;        
     }
+}
+
+#commentForm {
+    margin-top: 50px;
 }
