@@ -16,11 +16,6 @@ export const watch = async (req, res) => {
         return res.status(404).render("pages/error/404", { pageTitle: "Video not found." })
     }
     console.log(video);
-    //for each comment in comments find user's Pic
-    const comments= video.comments;
-    comments.forEach(comment => {
-      const commentOwner = User.findById(comment.owner);
-    })
     return res.render("video/watch", {pageTitle: "Videos", video })
 };
 
@@ -155,6 +150,8 @@ export const createComment = async (req, res) => {
   const comment = await Comment.create({
     text,
     owner: user._id,
+    ownerProfilePic: user.profilePicPath,
+    ownerName: user.username,
     video: id,
   });
   video.comments.push(comment._id);
