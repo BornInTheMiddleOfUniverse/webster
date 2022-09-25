@@ -334,6 +334,46 @@ input[type=checkbox]:checked + div.hamburger {
   display: block;
 }
 
+.add-comments {
+  margin-bottom: 40px;
+}
+
+.comment-box {
+  display: grid;
+  grid-template-areas: "comment-ownerProfilePic comment-box__top comment-box__top ." "comment-ownerProfilePic  comment-text comment-text comment-text" "comment-ownerProfilePic comment-box__bottom . .";
+  grid-template-columns: 70px repeat(3, auto);
+  margin-bottom: 40px;
+}
+.comment-box .comment-ownerProfilePic {
+  grid-area: comment-ownerProfilePic;
+  display: flex;
+  justify-content: top;
+  align-items: center;
+}
+.comment-box .comment-ownerProfilePic img {
+  border-radius: 50%;
+}
+.comment-box .comment-box__top {
+  grid-area: comment-box__top;
+  margin-bottom: 5px;
+}
+.comment-box .comment-text {
+  grid-area: comment-text;
+  margin-bottom: 10px;
+}
+.comment-box .comment-box__bottom {
+  grid-area: comment-box__bottom;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.comment-box .comment-box__bottom .like-btns {
+  display: flex;
+  margin-right: 40px;
+  justify-content: space-between;
+  width: 50px;
+}
+
 div.enter_user_container {
   display: flex;
   align-items: center;

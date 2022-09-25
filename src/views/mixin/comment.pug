@@ -1,11 +1,13 @@
 mixin comment(comment)
     div.comment-box
         div.comment-ownerProfilePic
-            img(src=comment.ownerProfilePic)        
-        div.comment-contents
+            img(src=comment.ownerProfilePic, height="50px")       
+        div.comment-box__top
             span.comment-owner #{comment.ownerName}
             span.comment-createdAt #{comment.createdAt}
-            p.comment-text #{comment.text}
-            i.far.fa-thumbs-up
-            i.far.fa-thumbs-down
+        p.comment-text #{comment.text}
+        div.comment-box__bottom
+            div.like-btns
+                i.far.fa-thumbs-up
+                i.far.fa-thumbs-down
             span.reply reply
