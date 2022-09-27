@@ -1,7 +1,7 @@
 mixin comment(comment)
     div.comment-box
-        div.comment-ownerProfilePic
-            img(src=comment.ownerProfilePic, height="50px")       
+        div.comment-owner-img
+            img(src=comment.ownerProfilePic)       
         div.comment-box__top
             span.comment-owner #{comment.ownerName}
             span.comment-createdAt #{comment.createdAt}

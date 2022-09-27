@@ -257,6 +257,7 @@ div.hamburger {
 }
 #videoInfo div.videoInfo__description {
   margin-top: 15px;
+  margin-bottom: 50px;
 }
 
 #uploader_info {
@@ -270,10 +271,6 @@ div.hamburger {
 #uploader_info .uploaderInfo__uploader {
   margin-left: 30px;
   margin-right: 5px;
-}
-
-#commentForm {
-  margin-top: 50px;
 }
 
 input[type=checkbox] {
@@ -335,37 +332,68 @@ input[type=checkbox]:checked + div.hamburger {
 }
 
 .add-comments {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-bottom: 40px;
+}
+.add-comments .user-profile-pic {
+  height: 63px;
+  width: 62px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+.add-comments .user-profile-pic img {
+  width: 62px;
+  object-fit: cover;
+}
+.add-comments #commentForm {
+  display: flex;
+  margin-top: 7px;
+  width: 90%;
 }
 
 .comment-box {
   display: grid;
-  grid-template-areas: "comment-ownerProfilePic comment-box__top comment-box__top ." "comment-ownerProfilePic  comment-text comment-text comment-text" "comment-ownerProfilePic comment-box__bottom . .";
+  grid-template-areas: "owner-img comment-box__top comment-box__top ." "owner-img  comment-text comment-text comment-text" "owner-img comment-box__bottom . .";
   grid-template-columns: 70px repeat(3, auto);
   margin-bottom: 40px;
 }
-.comment-box .comment-ownerProfilePic {
-  grid-area: comment-ownerProfilePic;
+.comment-box .comment-owner-img {
+  grid-area: owner-img;
   display: flex;
   justify-content: top;
   align-items: center;
-}
-.comment-box .comment-ownerProfilePic img {
+  height: 60px;
+  width: 62px;
+  overflow: hidden;
   border-radius: 50%;
+  margin-right: 50px;
+}
+.comment-box .comment-owner-img img {
+  width: 62px;
+  object-fit: cover;
 }
 .comment-box .comment-box__top {
   grid-area: comment-box__top;
   margin-bottom: 5px;
+  margin-left: 24px;
 }
 .comment-box .comment-text {
   grid-area: comment-text;
   margin-bottom: 10px;
+  margin-left: 24px;
 }
 .comment-box .comment-box__bottom {
   grid-area: comment-box__bottom;
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-left: 24px;
 }
 .comment-box .comment-box__bottom .like-btns {
   display: flex;

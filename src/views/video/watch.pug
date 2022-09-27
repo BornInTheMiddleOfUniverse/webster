@@ -36,11 +36,14 @@ block content
             small.uploaderInfo__uploader Uploaded by 
             a(href=`/user/${String(video.owner._id)}`) #{video.owner.username}
         div.videoInfo__description=video.description        
+        hr
         
         if loggedInUser 
-            div.add-comments
-                form#commentForm
-                    textarea(cols="30", rows="1", placeholder="Write a nice comment here!")
+            div.add-comments          
+                div.user-profile-pic
+                        img#user-img(src=`${loggedInUser.profilePicPath}`)      
+                form#commentForm              
+                    textarea(cols="130", rows="1", placeholder="Write a nice comment here!")
                     button Add Comment
             div.comments
                 each comment in video.comments 
