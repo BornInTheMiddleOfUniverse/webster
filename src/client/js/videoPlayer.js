@@ -1,5 +1,6 @@
 const video = document.querySelector("video");
 const playBtn = document.getElementById("play");
+const playBtnIcon = playBtn.querySelector("i");
 const muteBtn = document.getElementById("mute");
 const likeBtn = document.getElementById("like");
 const volumeRange = document.getElementById("volume");
@@ -16,15 +17,11 @@ let controlsTimeout = null;
 let volumeValue = 0.5;
 video.volume = volumeValue;
 
-
 const handlePlayClick = () => {
-  if (video.paused) {
-    video.play();
-  } else {
-    video.pause();
-  }
-  playBtn.innerText = video.paused ? "Play" : "Pause";
-};
+  video.paused ? video.play() : video.pause();
+  playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
+}
+
 const handleMuteClick = () => {
   if (video.muted) {
     video.muted = false;
@@ -34,6 +31,7 @@ const handleMuteClick = () => {
   muteBtn.innerText = video.muted ? "Unmute" : "Mute";
   volumeRange.value = video.muted ? 0 : volumeValue;
 };
+
 const handleVolumeChange = (event) => {
   const {
     target: { value },
@@ -119,7 +117,6 @@ const handleLikeBtnClick = (event) => {
     method: "POST",
   });
 }
-
 
 window.addEventListener("keydown", function (event) {
   if (event.code == "Enter") {

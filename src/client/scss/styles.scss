@@ -33,8 +33,6 @@
     }
 }
 
-
-
 body{
     border: solid white;
     border-width: 0 50px;
@@ -46,15 +44,14 @@ body{
         "footer footer footer footer"
     ;
     grid-template-columns: 0.27fr 0.73fr 4fr 1fr;
-    overflow-x: hidden;
-    
+    overflow-x: hidden;    
     
     main {
         grid-area: main;
         display: grid;       
         height: 200vh;
         margin: 50px 110px 40px 40px;   
-        background-color: white;    
+        background-color: white;
     }
 };
     

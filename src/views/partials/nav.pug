@@ -22,6 +22,7 @@
                     a(href="/user/join") Join                    
                     a(href="/user/login") Log In
 
-                if loggedIn                    
+                if loggedIn   
+                    a(href=`/user/${loggedInUser._id}`) #{loggedInUser.username}'s Profile                 
                     a(href="/user/logout") Log Out
-                    a(href=`/user/${loggedInUser._id}`) #{loggedInUser.username}'s Profile
+                    

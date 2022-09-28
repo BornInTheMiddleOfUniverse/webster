@@ -380,8 +380,12 @@ input[type=checkbox]:checked + div.hamburger {
 }
 .comment-box .comment-box__top {
   grid-area: comment-box__top;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   margin-left: 24px;
+}
+.comment-box .comment-box__top .comment-createdAt {
+  font-weight: 700;
+  margin-left: 10px;
 }
 .comment-box .comment-text {
   grid-area: comment-text;
@@ -400,6 +404,15 @@ input[type=checkbox]:checked + div.hamburger {
   margin-right: 40px;
   justify-content: space-between;
   width: 50px;
+}
+.comment-box .comment-box__bottom .like-btns i:nth-child(2) {
+  transform: scaleX(-1);
+  margin-top: 1.5px;
+}
+
+.comments {
+  margin-top: 70px;
+  margin-bottom: 80px;
 }
 
 div.enter_user_container {
