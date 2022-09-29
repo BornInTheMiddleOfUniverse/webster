@@ -14,6 +14,7 @@ const addComment = (text) => {
   
   const ownerImg = document.createElement("img");
   ownerImg.src = document.querySelector(".user-profile-pic img").src;
+  ownerImg.crossOrigin="anonymous";
   commentOwnerProfilePic.appendChild(ownerImg);  
 
   const commentBoxTop = document.createElement("div");
@@ -42,7 +43,6 @@ const addComment = (text) => {
 
   const likeIcon = document.createElement("i");
   likeIcon.className = "far fa-thumbs-up";
-  console.log(likeIcon);
   const dislikeIcon = document.createElement("i");
   dislikeIcon.className = "far fa-thumbs-down";
   likeBtns.appendChild(likeIcon);
@@ -61,7 +61,6 @@ const addComment = (text) => {
   videoComments.prepend(newCommentBox);
 }
 
-
 const handleSubmit = async (event) => {
   event.preventDefault();
   const text = textarea.value;
@@ -74,7 +73,7 @@ const handleSubmit = async (event) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ text, commentId }),
+    body: JSON.stringify({ text }),
   })
   textarea.value = "";
   if ( response.status == 201 ) {
@@ -84,4 +83,5 @@ const handleSubmit = async (event) => {
 
 if (form) {
   form.addEventListener("submit", handleSubmit);
+  
 }
