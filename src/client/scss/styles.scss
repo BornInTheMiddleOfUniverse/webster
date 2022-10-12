@@ -21,7 +21,6 @@
 @import "./screens/videos.scss";
 @import "./screens/join.scss";
 
-
 //Defaults
 * {
     a {
@@ -44,7 +43,6 @@ body{
         "footer footer footer footer"
     ;
     grid-template-columns: 0.27fr 0.73fr 4fr 1fr;
-    overflow-x: hidden;    
     
     main {
         grid-area: main;
@@ -52,6 +50,10 @@ body{
         height: 200vh;
         margin: 50px 110px 40px 40px;   
         background-color: white;
+    }
+    div.contents {
+      overflow: visible;
+      
     }
 };
     
@@ -80,6 +82,7 @@ body{
     text-align: center;
     animation: goAway 0.5s ease-in-out forwards;
     animation-delay: 3s;
+    color: $rwred;
     &.error {
       background-color: $rwred;
       color: white;

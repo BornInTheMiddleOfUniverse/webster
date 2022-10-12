@@ -1,22 +1,16 @@
 mixin comment(comment)
-    div.comment-box
+    div.comment-box(data-id=comment.id, data-owner=comment.owner)
+
         div.comment-owner-img
-            img(src=comment.ownerProfilePic, crossorigin="anonymous")       
+            img(src=comment.ownerProfilePic, crossorigin="anonymous")  
+
         div.comment-box__top
             span.comment-owner #{comment.ownerName}
             span.comment-createdAt #{comment.createdAt}
-        p.comment-text #{comment.text}
-            div.ellipsis
-                i.fa-solid.fa-ellipsis-vertical
-                div.popup
-                    if String(loggedInUser._id) === String(comment.owner._id)
-                        div.edit-comment
-                            i.fa-light.fa-pen
-                        div.delete-comment
-                            i.fa-light.fa-trash
-                    else
-                        div.report-comment
-                            i.fa-solid.fa-flag
+
+        div.comment-text #{comment.text}
+        div.ellipsis(data-owner=comment.owner)
+            i.fa-solid.fa-ellipsis-vertical
 
         div.comment-box__bottom
             div.like-btns

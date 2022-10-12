@@ -21,6 +21,7 @@ block content
                 span#fullScreen
                     i.fas.fa-expand
 
+
     div#videoInfo
         div.videoInfo__hashtags=video.hashtags
         h2.videoInfo__title=video.title
@@ -38,20 +39,13 @@ block content
         div.videoInfo__description=video.description        
         hr
         
-        if loggedInUser 
-            div.add-comments          
-                div.user-profile-pic
-                        img(src=`${loggedInUser.profilePicPath}`, crossorigin="anonymous")      
-                form#commentForm              
-                    textarea(cols="130", rows="1", placeholder="Write a nice comment here!")
-                    button Add Comment
-            div.comments
-                each comment in video.comments 
-                    +comment(comment)
+    include ../components/comment      
 
-        if loggedInUser && String(video.owner._id) === String(loggedInUser._id)            
-            a(href=`${video.id}/edit`) Edit Video &rarr; 
+    if loggedInUser && String(video.owner._id) === String(loggedInUser._id)            
+        a(href=`${video.id}/edit`) Edit Video &rarr; 
     
+
+
 block scripts
     script(src="/static/js/videoPlayer.js")
     if loggedInUser

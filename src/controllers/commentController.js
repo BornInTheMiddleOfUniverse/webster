@@ -23,18 +23,28 @@ export const createComment = async (req, res) => {
     commentOwner.comments.push(comment._id);
     video.comments.push(comment._id);
     commentOwner.save();
-    console.log(`commentOwner ${commentOwner}`);
-    console.log(`String(loggedInUser.comments) ${String(user.comments)}`)
-    console.log(`String(comment._id) ${String(comment._id)}`);
-
 
     video.save();
-    return res.sendStatus(201);
+    return res.status(201).json({ newCommentId: comment._id, ownerId: commentOwner._id });
   };
 
-// export const updateComment = (req, res) => {
+export const updateComment = (req, res) => {
+  const {
+    session: { user },
+    body: { text },
+    params: {commentId},
+  } = req;
+  const comment = await Comment.findById(commentId);
 
-// }
+  if (!comment) {
+    return res.sendStatus(404);
+  }
+  if (String(comment.owner) !== user) {
+    res.sendStatus(401);
+  }
+  await Comment.findByIdAndUpdate(commentId, { text });
+  return res.sendStatus(200);
+};
 
 // export const deleteComment = (req, res) => {
 
