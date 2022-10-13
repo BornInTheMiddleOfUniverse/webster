@@ -8,12 +8,13 @@ const profileLink = document.getElementById("profileLink");
 const loggedInUserId = profileLink.href.slice(-24);
 const editForm = document.getElementById("editForm");
 
-const addComment = (text, id, owner) => {
+const addComment = (text, id, owner, video) => {
   const videoComments = document.querySelector(".comments");
   const newCommentBox = document.createElement("div");
   newCommentBox.className = "comment-box";
   newCommentBox.dataset.id = id;
   newCommentBox.dataset.owner = owner;
+  newCommentBox.dataset.video = video;
   const commentOwnerProfilePic = document.createElement("div");
   commentOwnerProfilePic.className = "comment-owner-img";
 
@@ -74,15 +75,18 @@ const addComment = (text, id, owner) => {
   newCommentBox.appendChild(ellipsis);
   newCommentBox.appendChild(commentBoxBottom);
   videoComments.prepend(newCommentBox);
+
+  ellipsis.addEventListener("click", handleEllipsisClick);
 };
 
-const handleSubmit = async (event) => {
+const createComment = async (event) => {
   event.preventDefault();
   const text = textarea.value;
   const videoId = videoContainer.dataset.id;
   if (text === "") {
     return;
   }
+
   const response = await fetch(`/api/videos/${videoId}/comment`, {
     method: "POST",
     headers: {
@@ -98,7 +102,60 @@ const handleSubmit = async (event) => {
   }
 };
 
-const handleEllipsisClick = async(event) => {
+const updateComment = async (
+  preEdittedText,
+  edittedText,
+  editForm,
+  commentId
+) => {
+  if (preEdittedText == edittedText) {
+    handleEditCancel();
+    return;
+  }
+
+  const response = await fetch(`/api/videos/${commentId}/comment`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ edittedText, commentId }),
+  });
+
+  if (response.status == 200) {
+    const commentBox = editForm.parentNode;
+    commentBox.querySelector(".comment-text").textContent = edittedText;
+    editForm.remove();
+    const commentBoxtop = commentBox.querySelector(".comment-box__top");
+    const commentText = commentBox.querySelector(".comment-text");
+    const commentBoxBottom = commentBox.querySelector(".comment-box__bottom");
+    const ellipsis = commentBox.querySelector(".ellipsis");
+
+    ellipsis.style.visibility = "visible";
+    commentBoxtop.style.visibility = "visible";
+    commentText.style.visibility = "visible";
+    commentBoxBottom.style.visibility = "visible";
+    commentBox.addEventListener("mouseenter", () => {
+      ellipsis.style.opacity = "1";
+    });
+    commentBox.addEventListener("mouseleave", () => {
+      ellipsis.style.opacity = "0";
+    });
+
+
+  }
+};
+
+const handleCommentDelete = async (event) => {
+  const commentBox = event.currentTarget.parentNode.parentNode.parentNode;
+  const {
+    dataset: { id },
+  } = commentBox;
+  await fetch(`/api/videos/${id}/comment`, {
+    method: "DELETE",
+  });
+  commentBox.remove();
+};
+
+const handleEllipsisClick = async (event) => {
+  console.log('click', );
   const popup = document.createElement("div");
   popup.className = "popup";
   const ellipsis = event.target;
@@ -129,7 +186,7 @@ const handleEllipsisClick = async(event) => {
     popup.appendChild(deleteBtn);
     event.target.parentNode.appendChild(popup);
     editBtn.addEventListener("click", handleCommentEditBtnClick);
-
+    deleteBtn.addEventListener("click", handleCommentDelete);
   } else {
     const reportBtn = document.createElement("div");
     reportBtn.className = "report-comment";
@@ -144,11 +201,15 @@ const handleEllipsisClick = async(event) => {
   }
   ellipsis.style.opacity = "1";
   event.target.removeEventListener("click", handleEllipsisClick);
-  event.target.addEventListener("click", handleEllipsisClickTwice);
+  event.target.addEventListener("click", handleEllipsisClickTwice, {
+    once: true,
+  });
 };
 
 const handleEllipsisClickTwice = (event) => {
-  const popup = document.querySelector(".popup");
+  console.log('twice', );
+  const popup = document.querySelectorAll(".popup");
+  console.log('popup', popup);
   const ellipsis = event.target;
   const commentBox = ellipsis.parentNode.parentNode;
 
@@ -163,8 +224,6 @@ const handleEllipsisClickTwice = (event) => {
   });
 };
 
-
-
 const handleCommentEditBtnClick = (event) => {
   const commentBox = event.currentTarget.parentNode.parentNode.parentNode;
 
@@ -172,7 +231,6 @@ const handleCommentEditBtnClick = (event) => {
   const commentText = commentBox.querySelector(".comment-text");
   const commentBoxBottom = commentBox.querySelector(".comment-box__bottom");
   const ellipsis = commentBox.querySelector(".ellipsis");
-
   ellipsis.style.visibility = "hidden";
   commentBoxtop.style.visibility = "hidden";
   commentText.style.visibility = "hidden";
@@ -181,9 +239,9 @@ const handleCommentEditBtnClick = (event) => {
   const editForm = document.createElement("form");
   editForm.id = "editCommentForm";
   const editTextarea = document.createElement("textarea");
-  editTextarea.cols="70";
+  editTextarea.cols = "70";
   editTextarea.rows = "1";
-  editTextarea.value = commentText.textContent; 
+  editTextarea.value = commentText.textContent;
   const editSubmitBtn = document.createElement("button");
   editSubmitBtn.innerText = "Edit";
   editSubmitBtn.className = "edit-btn";
@@ -194,48 +252,26 @@ const handleCommentEditBtnClick = (event) => {
   editForm.appendChild(editTextarea);
   editForm.appendChild(editSubmitBtn);
   editForm.appendChild(editCancelBtn);
-  commentBox.appendChild(editForm);  
-
+  commentBox.appendChild(editForm);
 
   editCancelBtn.addEventListener("click", handleEditCancel);
   editSubmitBtn.addEventListener("click", handleEditSubmitBtnClick);
+  const popup = ellipsis.querySelector(".popup");
+  popup.remove();
 };
 
 const handleEditSubmitBtnClick = (event) => {
   event.preventDefault();
-  const editTextarea = document.querySelector("textarea");
-  const text = editTextarea.value;
-  console.log(text);
+  const commentBox = event.target.parentNode.parentNode;
+  const preEdittedText = commentBox.querySelector(".comment-text").textContent;
+  const editTextarea = document.querySelector("#editCommentForm textarea");
+  const edittedText = editTextarea.value;
+  const commentId = commentBox.dataset.id;
   const editForm = document.getElementById("editCommentForm");
-  updateComment(text, editForm);
+  updateComment(preEdittedText, edittedText, editForm, commentId);
 };
 
-const updateComment = async (text, editForm) => {
-
-  if (text == ""){
-    console.log("nothing");
-    handleEditCancel();
-    return;
-  } 
-
-  const response = await fetch(`/api/videos/${videoId}/comment`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text }),
-  });
-  if (response.status == 200) {
-    editForm.remove();
-    const commentBox = editForm.parentNode;
-    console.log(commentBox.querySelector(".comment-text").innerText);
-    commentBox.querySelector(".comment-text").innerText = text;
-  }
-
-
-}
-
 const handleEditCancel = () => {
-  console.log("edit canceled");
-
   const videoComments = document.querySelector(".comments");
   const editCommentForm = videoComments.querySelector("#editCommentForm");
   const commentBox = editCommentForm.parentNode;
@@ -244,24 +280,24 @@ const handleEditCancel = () => {
   const commentBoxBottom = commentBox.querySelector(".comment-box__bottom");
   const ellipsis = commentBox.querySelector(".ellipsis");
 
-  editCommentForm.remove();  
+  editCommentForm.remove();
   ellipsis.style.visibility = "visible";
   ellipsis.addEventListener("click", handleEllipsisClickTwice, { once: true });
   commentBoxtop.style.visibility = "visible";
   commentText.style.visibility = "visible";
   commentBoxBottom.style.visibility = "visible";
-
+  //ellipsis
+  commentBox.addEventListener("mouseenter", () => {
+    ellipsis.style.opacity = "1";
+  });
+  commentBox.addEventListener("mouseleave", () => {
+    ellipsis.style.opacity = "0";
+  });
 };
 
-
-
-
-
-
 if (form) {
-  form.addEventListener("submit", handleSubmit);
+  form.addEventListener("submit", createComment);
 }
 allEllipses.forEach((ellipsis) => {
   ellipsis.addEventListener("click", handleEllipsisClick, { once: true });
 });
-

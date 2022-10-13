@@ -1,5 +1,5 @@
 mixin comment(comment)
-    div.comment-box(data-id=comment.id, data-owner=comment.owner)
+    div.comment-box(data-id=comment.id, data-owner=comment.owner, data-video=comment.video)
 
         div.comment-owner-img
             img(src=comment.ownerProfilePic, crossorigin="anonymous")  
