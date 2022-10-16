@@ -199,21 +199,19 @@ const handleEllipsisClick = async (event) => {
     popup.appendChild(reportBtn);
     event.target.parentNode.appendChild(popup);
   }
-  ellipsis.style.opacity = "1";
   event.target.removeEventListener("click", handleEllipsisClick);
   event.target.addEventListener("click", handleEllipsisClickTwice, {
     once: true,
   });
+  ellipsis.style.opacity = "1";
+
 };
 
 const handleEllipsisClickTwice = (event) => {
   console.log('twice', );
-  const popup = document.querySelectorAll(".popup");
-  console.log('popup', popup);
   const ellipsis = event.target;
+  const popup = ellipsis.parentNode.querySelector(".popup");
   const commentBox = ellipsis.parentNode.parentNode;
-
-  popup.remove();
   ellipsis.removeEventListener("click", handleEllipsisClickTwice);
   ellipsis.addEventListener("click", handleEllipsisClick);
   commentBox.addEventListener("mouseenter", () => {
@@ -222,6 +220,7 @@ const handleEllipsisClickTwice = (event) => {
   commentBox.addEventListener("mouseleave", () => {
     ellipsis.style.opacity = "0";
   });
+  popup.remove();
 };
 
 const handleCommentEditBtnClick = (event) => {
@@ -293,6 +292,8 @@ const handleEditCancel = () => {
   commentBox.addEventListener("mouseleave", () => {
     ellipsis.style.opacity = "0";
   });
+  ellipsis.removeEventListener("click", handleEllipsisClickTwice);
+  ellipsis.addEventListener("click", handleEllipsisClick, {once: true});
 };
 
 if (form) {
