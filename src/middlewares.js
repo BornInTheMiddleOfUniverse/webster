@@ -1,6 +1,20 @@
 import morgan from "morgan";
 import multer from "multer";
+import multerS3 from "multer-s3";
+import aws from "aws-sdk";
 
+const s3 = new aws.S3({
+    credentials: {
+        accessKeyId: process.env.AWS_ID,
+        secretAccessKey: process.env.AWS_SECRET,
+    }
+});
+
+const multerUploader = multerS3({
+    s3: s3,
+    bucket: "websterbyj",
+    acl: "public-read",    
+})
 
 export const localsMiddleware = (req, res, next) => {
     res.locals.siteTitle = "Webster";
@@ -34,7 +48,9 @@ export const profilePicUpload = multer ({
     limits: {
         fileSize:  3 * 1024 * 1024,
     },
+    storage: multerUploader,
 });
 export const videoUpload = multer({
     dest: "uploads/videos/",
+    storage: multerUploader,
 });

@@ -37,7 +37,7 @@ export const postJoin = async (req, res) => {
         password,
         username,
         location,
-        profilePicPath: "/" + picFile.path,
+        profilePicPath: picFile.path,
       });
     
       return res.redirect("/user/login");
@@ -163,6 +163,8 @@ export const getEdit = async (req, res) => {
 };
 export const postEdit = async (req, res) => {    
     const { session : { user : { _id, profilePicPath } }, body: { email, username, location }, file } = req;
+    console.log('profilePicPath', profilePicPath);
+    console.log('file', file);
 
     const originalUser = req.session.user; 
     const pageTitle = "Edit Profile";
@@ -171,11 +173,11 @@ export const postEdit = async (req, res) => {
     const hasEmailNotChanged = Boolean(email === originalUser.email);
     const hasUsernameNotChanged = Boolean(username === originalUser.username);
 
-    let hasPicNotChanged = true;
+    let isPicSame = true;
     let newProfilePicPath = profilePicPath;
     if (file) {    
-        hasPicNotChanged = false;
-        newProfilePicPath = "/" + file.path;
+        isPicSame = false;
+        newProfilePicPath = file.location;
     } else if (profilePicPath === null) {
         newProfilePicPath = "../img/profile_pic.jpeg";
     }
@@ -193,7 +195,7 @@ export const postEdit = async (req, res) => {
         errorMessageArray.length === 0 
         && hasEmailNotChanged === true 
         && hasUsernameNotChanged === true
-        && hasPicNotChanged === true
+        && isPicSame === true
         ) {
         return res.status(400).render("user/edit", { pageTitle, errorMessage: "Nothing has changed."})
     }
